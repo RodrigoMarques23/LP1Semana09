@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace PlayerManager1 // >>> Change to PlayerManager2 for exercise 4 <<< //
@@ -11,7 +13,7 @@ namespace PlayerManager1 // >>> Change to PlayerManager2 for exercise 4 <<< //
         /// <summary>
         /// The list of all players.
         /// </summary>
-        private List<Player> playerList() { player1; player2; }
+        private List<Player> playerList;
 
         /// <summary>
         /// Program begins here.
@@ -35,6 +37,7 @@ namespace PlayerManager1 // >>> Change to PlayerManager2 for exercise 4 <<< //
                 new Player("Best player ever", 100),
                 new Player("An even better player", 500)
             };
+
         }
 
         /// <summary>
@@ -71,10 +74,6 @@ namespace PlayerManager1 // >>> Change to PlayerManager2 for exercise 4 <<< //
                         Console.Error.WriteLine("\n>>> Unknown option! <<<\n");
                         break;
                 }
-
-                // Wait for user to press a key...
-                Console.Write("\nPress any key to continue...");
-                Console.ReadKey(true);
                 Console.WriteLine("\n");
 
                 // Loop keeps going until players choses to quit (option 4)
@@ -86,7 +85,7 @@ namespace PlayerManager1 // >>> Change to PlayerManager2 for exercise 4 <<< //
         /// </summary>
         private void ShowMenu()
         {
-            Console.WriteLine("Welcome to the Player Manager menu");
+            Console.WriteLine("Player Manager Menu");
             Console.WriteLine("Press 1 to: Insert Player");
             Console.WriteLine("Press 2 to: List all players");
             Console.WriteLine("Press 3 to: To see players with score above X");
@@ -104,12 +103,8 @@ namespace PlayerManager1 // >>> Change to PlayerManager2 for exercise 4 <<< //
             Console.WriteLine("Insert Player Score");
             int s = Int32.Parse(Console.ReadLine());
 
-            Player n = new Player(n, s);
-
-
-            // /////////////////// //
-            // COMPLETE ME PLEASE! //
-            // /////////////////// //
+            Player player = new Player(n, s);
+            playerList.Add(player);
         }
 
         /// <summary>
@@ -123,9 +118,10 @@ namespace PlayerManager1 // >>> Change to PlayerManager2 for exercise 4 <<< //
         /// </param>
         private static void ListPlayers(IEnumerable<Player> playersToList)
         {
-            // /////////////////// //
-            // COMPLETE ME PLEASE! //
-            // /////////////////// //
+            foreach (Player p in playersToList)
+            {
+                Console.WriteLine($"Player : {p.Name} has score = {p.Score}");
+            }
         }
 
         /// <summary>
@@ -133,9 +129,16 @@ namespace PlayerManager1 // >>> Change to PlayerManager2 for exercise 4 <<< //
         /// </summary>
         private void ListPlayersWithScoreGreaterThan()
         {
-            // /////////////////// //
-            // COMPLETE ME PLEASE! //
-            // /////////////////// //
+            Console.WriteLine("Write how much score the player needs");
+            int minScore = Int32.Parse(Console.ReadLine());
+
+            List<Player> playersWithHighScore = 
+                GetPlayersWithScoreGreaterThan(minScore).ToList();
+
+            foreach(Player p in playersWithHighScore)
+            {
+                Console.WriteLine($"Player: {p.Name} has scored: {p.Score}");
+            }
         }
 
         /// <summary>
@@ -147,9 +150,16 @@ namespace PlayerManager1 // >>> Change to PlayerManager2 for exercise 4 <<< //
         /// </returns>
         private IEnumerable<Player> GetPlayersWithScoreGreaterThan(int minScore)
         {
-            // /////////////////// //
-            // COMPLETE ME PLEASE! //
-            // /////////////////// //
+            List<Player> playerHighScore = new List<Player>();
+
+            foreach (Player p in playerList)
+            {
+                if (p.Score > minScore)
+                {
+                    playerHighScore.Add(p);
+                }
+            }
+            return playerHighScore;
         }
     }
 }
