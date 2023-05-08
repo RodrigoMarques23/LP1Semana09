@@ -11,7 +11,7 @@ namespace PlayerManager1 // >>> Change to PlayerManager2 for exercise 4 <<< //
         /// <summary>
         /// The list of all players.
         /// </summary>
-        private List<Player> playerList;
+        private List<Player> playerList() { player1; player2; }
 
         /// <summary>
         /// Program begins here.
@@ -86,9 +86,11 @@ namespace PlayerManager1 // >>> Change to PlayerManager2 for exercise 4 <<< //
         /// </summary>
         private void ShowMenu()
         {
-            // /////////////////// //
-            // COMPLETE ME PLEASE! //
-            // /////////////////// //
+            Console.WriteLine("Welcome to the Player Manager menu");
+            Console.WriteLine("Press 1 to: Insert Player");
+            Console.WriteLine("Press 2 to: List all players");
+            Console.WriteLine("Press 3 to: To see players with score above X");
+            Console.WriteLine("Press 4 to: Exit");
         }
 
         /// <summary>
@@ -96,6 +98,15 @@ namespace PlayerManager1 // >>> Change to PlayerManager2 for exercise 4 <<< //
         /// </summary>
         private void InsertPlayer()
         {
+            Console.WriteLine("Insert Player Name");
+            string n = Console.ReadLine();
+
+            Console.WriteLine("Insert Player Score");
+            int s = Int32.Parse(Console.ReadLine());
+
+            Player n = new Player(n, s);
+
+
             // /////////////////// //
             // COMPLETE ME PLEASE! //
             // /////////////////// //
